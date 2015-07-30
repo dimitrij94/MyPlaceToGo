@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">My place to go</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_user_proffile">user_proffile</string>
+    <string name="title_activity_serch_results">serchResults</string>
+    <string name="title_activity_menu_order">MenuOrderActivity</string>
+    <string name="url_user_del_place">127.0.0.1:8080\\MyPlaceToGo\\:android\\deleteUserPlace</string>
+    <string name="url_user_authorization">127.0.0.1:8080\\android\\authorization</string>
+    <string name="url_user_place_rating_changed">127.0.0.1:8080\\MyPlaceToGo\\:android\\chageRating\\</string>
+    <string name="title_activity_popup">Popup</string>
+    <string name="title_activity_registeration">Registeration</string>
+
+</resources>
