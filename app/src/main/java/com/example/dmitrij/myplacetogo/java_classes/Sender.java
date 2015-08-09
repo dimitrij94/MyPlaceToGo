@@ -7,8 +7,11 @@ package com.example.dmitrij.myplacetogo.java_classes;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
@@ -36,6 +39,17 @@ public class Sender<T> {
         finally{
             out.flush();
             out.close();
+        }
+    }
+    public void sendPhoto(InputStream in,OutputStream out) throws IOException {
+        BufferedOutputStream bout = new BufferedOutputStream(out);
+        BufferedInputStream bin = new BufferedInputStream(in);
+        int offset=0;
+        int readed;
+        byte[]buffer=new byte[512];
+        while((readed=bin.read(buffer,offset,buffer.length))!=-1){
+                bout.write(buffer,offset,buffer.length);
+                offset+=readed;
         }
     }
 }

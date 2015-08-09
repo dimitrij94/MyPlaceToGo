@@ -32,6 +32,10 @@
             android:name=".Registeration"
             android:label="@string/title_activity_registeration" >
         </activity>
+        <activity
+            android:name=".SelectFileActivity"
+            android:label="@string/title_activity_select_file" >
+        </activity>
     </application>
 
 </manifest>

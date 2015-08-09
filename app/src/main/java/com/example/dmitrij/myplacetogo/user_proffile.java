@@ -1,6 +1,7 @@
 package com.example.dmitrij.myplacetogo;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
@@ -147,6 +148,9 @@ public class user_proffile extends ActionBarActivity {
         userEmailView.setText(client.clientEmail);
 
         fillUserPlacesList(client.clientPlaces);
+        byte[]imageBody=client.clientPhotos[0].getBody();
+        userPhotoView.setImageBitmap(BitmapFactory.decodeByteArray(imageBody,0,imageBody.length));
+
     }
 
     @Override

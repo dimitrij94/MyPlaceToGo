@@ -14,8 +14,9 @@
         android:id="@+id/userEmailField"
         android:hint="Email"
         android:gravity="center"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="129dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -28,24 +29,13 @@
         android:layout_below="@+id/userEmailField"
         android:layout_centerHorizontal="true" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
-        android:src="@drawable/logototal"
-        android:layout_alignLeft="@+id/userEmailField"
-        android:layout_alignStart="@+id/userEmailField"
-        android:layout_above="@+id/userEmailField"
-        android:layout_alignRight="@+id/userEmailField"
-        android:layout_alignEnd="@+id/userEmailField"
-        android:layout_marginBottom="86dp" />
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/userPasswordField"
-        android:gravity="center_vertical|center_horizontal">
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="80dp">
 
         <Button
             android:layout_width="90dp"

@@ -62,7 +62,7 @@ public class PlaceProphile extends ActionBarActivity {
         fillInterface(profile);
         filPlaceMenuList(placeMenus);
         placeRating.setOnRatingBarChangeListener(createListener());
-        setImage(Long.valueOf(profile.placePhotos[0].url));
+        setImage(Long.valueOf(profile.placePhotos[0].getUrl()));
 }
 
     public void filPlaceMenuList(PlaceMenu[] places){

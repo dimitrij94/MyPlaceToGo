@@ -24,7 +24,7 @@ public class Client  implements Parcelable{
     public Place[]clientPlaces;
     public String clientAddress;
     public String clientSurname;
-    public Long[] photosURL;
+    public Photo[] clientPhotos;
 
     public long getId() {
         return id;
@@ -46,7 +46,7 @@ public class Client  implements Parcelable{
         clientPass = pass;
         return this;
     }
-
+    
     public Client address(String address){
         clientAddress = address;
         return this;
@@ -56,6 +56,7 @@ public class Client  implements Parcelable{
     public int describeContents() {
         return 0;
     }
+
     private static final Parcelable.Creator<Client>CREATOR=new Parcelable.Creator<Client>(){
 
         @Override
@@ -68,6 +69,7 @@ public class Client  implements Parcelable{
             return new Client[size];
         }
     };
+
     public Client(){}
 
     public Client(Parcel in){
@@ -77,7 +79,7 @@ public class Client  implements Parcelable{
         clientAddress=in.readString();
         clientSurname=in.readString();
         for (int i = 0; i < in.readInt(); i++) {
-            photosURL[i]=in.readLong();
+            clientPhotos[i]=in.readParcelable(Photo.class.getClassLoader());
         }
         for (int i = 0; i < in.readInt(); i++) {
             clientPlaces[i]=in.readParcelable(Place.class.getClassLoader());
@@ -91,9 +93,9 @@ public class Client  implements Parcelable{
         dest.writeString(clientPass);
         dest.writeString(clientAddress);
         dest.writeString(clientSurname);
-        dest.writeInt(photosURL.length);
-        for(Long l:photosURL){
-            dest.writeLong(l);
+        dest.writeInt(clientPhotos.length);
+        for(Photo photo:clientPhotos){
+            dest.writeParcelable(photo, flags);
         }
         dest.writeInt(clientPlaces.length);
         for(Place p:clientPlaces){

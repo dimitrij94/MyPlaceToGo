@@ -7,10 +7,12 @@
     <string name="title_activity_user_proffile">user_proffile</string>
     <string name="title_activity_serch_results">serchResults</string>
     <string name="title_activity_menu_order">MenuOrderActivity</string>
-    <string name="url_user_del_place">127.0.0.1:8080\\MyPlaceToGo\\:android\\deleteUserPlace</string>
-    <string name="url_user_authorization">127.0.0.1:8080\\android\\authorization</string>
-    <string name="url_user_place_rating_changed">127.0.0.1:8080\\MyPlaceToGo\\:android\\chageRating\\</string>
+    <string name="url_user_del_place">93.73.27.207:8080\\MyPlaceToGo\\:android\\deleteUserPlace</string>
+    <string name="url_user_authorization">93.73.27.2078080\\android\\authorization</string>
+    <string name="url_user_place_rating_changed">93.73.27.207:8080\\android\\MyPlaceToGo\\chageRating\\</string>
+    <string name="url_user_photo_uppload">93.73.27.207:8080\\android\\MyPlaceToGo\\UpploadUserPhoto\\</string>
     <string name="title_activity_popup">Popup</string>
     <string name="title_activity_registeration">Registeration</string>
+    <string name="title_activity_select_file">SelectFileActivity</string>
 
 </resources>

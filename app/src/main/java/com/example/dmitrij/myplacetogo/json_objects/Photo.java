@@ -23,18 +23,17 @@ import java.net.URLEncoder;
 public class Photo implements Parcelable {
 
     private final String tableName="photos";
-    public String url;
-    private String name;
+    private Long url;
     private byte[]body;
     private final String thisCode = "UTF-8";
     public Photo(){}
 
-    public Photo(String url){
+    public Photo(Long url){
         this.url=url;
         HttpURLConnection connection = null;
         try {
             connection=(HttpURLConnection)new URL("\"127.0.0.1:8080\\MyPlaceToGo\\:android\\getPhoto\\").openConnection();
-            String requestParams ="placeId"+ URLEncoder.encode(url, thisCode);
+            String requestParams ="placeId"+ URLEncoder.encode(String.valueOf(url), thisCode);
             if (connection != null) {
                 OutputStream out = connection.getOutputStream();
                 out.write(requestParams.getBytes());
@@ -55,9 +54,7 @@ public class Photo implements Parcelable {
         }
     }
 
-
     public void savePhoto(SQLiteDatabase db ){
-
         ContentValues cv = new ContentValues();
         cv.put("url",url);
         cv.put("body",body);
@@ -70,7 +67,7 @@ public class Photo implements Parcelable {
         int columnIndexBody = c.getColumnIndex("body");
         Photo[] photos = new Photo[c.getCount()];
         for (int i = 0; c.moveToNext(); i++){
-            Photo photo = new Photo().setUrl(c.getString(columnIndexURL)).setBody(c.getBlob(columnIndexBody));
+            Photo photo = new Photo().setUrl(c.getLong(columnIndexURL)).setBody(c.getBlob(columnIndexBody));
             photos[i]=photo;
         }
     return photos;
@@ -83,8 +80,22 @@ public class Photo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeLong(url);
+        dest.writeByteArray(body);
     }
+
+    private final Parcelable.Creator<Photo>CREATOR=new Parcelable.Creator<Photo>(){
+
+        @Override
+        public Photo createFromParcel(Parcel parcel) {
+            return new Photo().setUrl(parcel.readLong()).setBody(parcel.createByteArray());
+        }
+
+        @Override
+        public Photo[] newArray(int i) {
+            return new Photo[i];
+        }
+    };
 
     class DBHelper extends SQLiteOpenHelper {
 
@@ -99,7 +110,7 @@ public class Photo implements Parcelable {
             // создаем таблицу с полями
             db.execSQL("create table "+tableName+"("
                     + "id integer primary key autoincrement,"
-                    + "url text,"
+                    + "url integer,"
                     + "body blob" + ");");
         }
 
@@ -109,7 +120,7 @@ public class Photo implements Parcelable {
         }
 }
 
-    public Photo setUrl(String url) {
+    public Photo setUrl(Long url) {
         this.url = url;
         return this;
     }
@@ -119,4 +130,11 @@ public class Photo implements Parcelable {
         return this;
     }
 
+    public byte[] getBody() {
+        return body;
+    }
+
+    public Long getUrl() {
+        return url;
+    }
 }

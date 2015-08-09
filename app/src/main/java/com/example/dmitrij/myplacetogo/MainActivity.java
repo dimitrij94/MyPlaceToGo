@@ -1,11 +1,8 @@
 package com.example.dmitrij.myplacetogo;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +21,8 @@ public class MainActivity extends ActionBarActivity {
 
 
     private final String encode = "UTF-8";
-
+    private final int REGISTER = 2;
+    Client client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -70,9 +68,7 @@ public class MainActivity extends ActionBarActivity {
                         if (in != null) {
                             Reciver<Client> clientReciver = new Reciver<Client>();
                             Client client = clientReciver.recive(in);
-                            Intent next = new Intent(getContext(), user_proffile.class);
-                            next.putExtra(Client.class.getCanonicalName(), client);
-                            startActivity(next);
+                            authorize(client);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -85,38 +81,34 @@ public class MainActivity extends ActionBarActivity {
         };
     }
 
-    public Context getContext(){
-        return this;
+    private void authorize(Client client){
+        Intent next = new Intent(this, user_proffile.class);
+        next.putExtra(Client.class.getCanonicalName(), client);
+        startActivity(next);
     }
 
     public View.OnClickListener createRegisterListeneer(){
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                      startActivity(new Intent(getContext(), Registeration.class));
+                startActivityForResult(new Intent(MainActivity.this, Registeration.class),REGISTER);
             }
         };
     }
 
+    /**
+     * Dispatch incoming result to the correct fragment.
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==RESULT_OK && requestCode==REGISTER){
+            client = data.getParcelableExtra(Client.class.getCanonicalName());
+            authorize(client);
         }
-
-        return super.onOptionsItemSelected(item);
     }
+
 }
